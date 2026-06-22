@@ -1,23 +1,100 @@
 <!DOCTYPE html>
 <html lang="da">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Datomaskinen</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Datomaskinen</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
+  <main class="app">
+    <section class="card">
+      <h1>Datomaskinen</h1>
+      <p class="subtitle">Find det tidspunkt flest kan.</p>
 
-    <h1>📅 Datomaskinen</h1>
+      <label>
+        Mødenavn
+        <input id="meetingTitle" type="text" placeholder="Fx Bestyrelsesmøde" />
+      </label>
 
-    <p>
-        Alle markerer de datoer de kan.
-        Datomaskinen finder overlap.
-    </p>
+      <label>
+        Beskrivelse
+        <textarea id="meetingDescription" placeholder="Kort info om mødet"></textarea>
+      </label>
 
-    <button>Opret møde</button>
+      <h3>Varighed</h3>
+      <div class="button-grid" id="durationButtons">
+        <button data-value="30 min">30 min</button>
+        <button data-value="1 time">1 time</button>
+        <button data-value="1½ time">1½ time</button>
+        <button data-value="2 timer">2 timer</button>
+      </div>
 
-    <button>Deltag</button>
+      <h3>Periode</h3>
+      <div class="button-grid" id="periodButtons">
+        <button data-value="2 uger">2 uger</button>
+        <button data-value="4 uger">4 uger</button>
+        <button data-value="6 uger">6 uger</button>
+        <button data-value="3 måneder">3 måneder</button>
+      </div>
 
+<h3>Antal deltagere</h3>
+<div class="button-grid" id="participantCountButtons">
+  <button data-value="3">3</button>
+  <button data-value="4">4</button>
+  <button data-value="5">5</button>
+  <button data-value="6">6</button>
+  <button data-value="7">7</button>
+  <button data-value="8">8</button>
+  <button data-value="9">9</button>
+  <button data-value="10">10</button>
+  <button data-value="11">11+</button>
+  <input
+  id="customParticipantCount"
+  type="number"
+  min="11"
+  placeholder="Skriv antal"
+  />
+</div>
+
+      <h3>Tidsblokke</h3>
+      <div class="button-grid" id="timeBlockButtons">
+        <button data-value="09-12">09-12</button>
+        <button data-value="12-15">12-15</button>
+        <button data-value="15-17">15-17</button>
+        <button data-value="17-19">17-19</button>
+        <button data-value="19-21">19-21</button>
+      </div>
+
+      <button id="createMeeting">Opret møde</button>
+    </section>
+
+    <section id="participantView" class="card hidden">
+      <h2 id="meetingName"></h2>
+      <p id="meetingText"></p>
+      <p><strong>Varighed:</strong> <span id="meetingDuration"></span></p>
+      <p><strong>Periode:</strong> <span id="meetingPeriod"></span></p>
+<p><strong>Antal deltagere:</strong> <span id="meetingParticipantCount"></span></p>
+<p><strong>Tidsblokke:</strong> <span id="meetingTimeBlocks"></span></p>
+
+      <label>
+        Dit navn
+        <input id="participantName" type="text" placeholder="Skriv dit navn" />
+      </label>
+
+      <h3>Hvornår kan du?</h3>
+      <div id="availabilityGrid"></div>
+
+      <button id="saveResponse">Gem svar</button>
+    </section>
+
+    <section id="ownerView" class="card hidden">
+      <h3>Bedste overlap</h3>
+      <div id="results"></div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
 </body>
 </html>
