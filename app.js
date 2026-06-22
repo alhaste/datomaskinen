@@ -9,7 +9,7 @@ const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const createMeetingButton = document.querySelector("#createMeeting");
 const saveResponseButton = document.querySelector("#saveResponse");
 
-const createView = document.querySelector("#createView");
+const participantView = document.querySelector("#participantView");
 const ownerView = document.querySelector("#ownerView");
 
 const meetingName = document.querySelector("#meetingName");
@@ -109,6 +109,7 @@ const link = `${window.location.origin}${window.location.pathname}?meeting=${dat
 
 meetingLink.value = link;
 meeting.id = data.id;
+meetingLinkBox.classList.remove("hidden");
 
   slots = generateSlots(selectedPeriod, selectedTimeBlocks);
 
