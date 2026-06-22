@@ -1,13 +1,3 @@
-const SUPABASE_URL = "https://cpgbopfzeuxtvhnkfdzn.supabase.co";
-
-const SUPABASE_ANON_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwZ2JvcGZ6ZXV4dHZobmtmZHpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIxMDQ1MjQsImV4cCI6MjA5NzY4MDUyNH0.C_Eh50OiYNp0y0DyFR65zxGYGFNG3-UFYuh6vNEIwL8";
-
-const supabase = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_ANON_KEY
-);
-
 const createMeetingButton = document.querySelector("#createMeeting");
 const saveResponseButton = document.querySelector("#saveResponse");
 
