@@ -10,6 +10,7 @@ const createMeetingButton = document.querySelector("#createMeeting");
 const saveResponseButton = document.querySelector("#saveResponse");
 
 const participantView = document.querySelector("#participantView");
+const createView = document.querySelector("#createView");
 const ownerView = document.querySelector("#ownerView");
 
 const meetingName = document.querySelector("#meetingName");
@@ -24,6 +25,8 @@ const results = document.querySelector("#results");
 const meetingLinkBox = document.querySelector("#meetingLinkBox");
 const meetingLink = document.querySelector("#meetingLink");
 const copyMeetingLinkButton = document.querySelector("#copyMeetingLink");
+const adminLink = document.querySelector("#adminLink");
+const copyAdminLinkButton = document.querySelector("#copyAdminLink");
 
 let meeting = {};
 let selectedDuration = "";
@@ -108,6 +111,12 @@ if (error) {
 const link = `${window.location.origin}${window.location.pathname}?meeting=${data.id}`;
 
 meetingLink.value = link;
+
+const adminUrl =
+  `${window.location.origin}${window.location.pathname}?admin=${data.id}`;
+
+adminLink.value = adminUrl;
+
 meeting.id = data.id;
 meetingLinkBox.classList.remove("hidden");
 
@@ -133,7 +142,10 @@ copyMeetingLinkButton.addEventListener("click", async () => {
   await navigator.clipboard.writeText(meetingLink.value);
   copyMeetingLinkButton.textContent = "Kopieret ✅";
 });
-
+copyAdminLinkButton.addEventListener("click", async () => {
+  await navigator.clipboard.writeText(adminLink.value);
+  copyAdminLinkButton.textContent = "Kopieret ✅";
+});
 saveResponseButton.addEventListener("click", async () => {
   const name = document.querySelector("#participantName").value;
 
