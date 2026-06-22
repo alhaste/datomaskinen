@@ -28,6 +28,13 @@ const copyMeetingLinkButton = document.querySelector("#copyMeetingLink");
 const adminLink = document.querySelector("#adminLink");
 const copyAdminLinkButton = document.querySelector("#copyAdminLink");
 const saveConfirmation = document.querySelector("#saveConfirmation");
+const adminMeetingName = document.querySelector("#adminMeetingName");
+const adminMeetingText = document.querySelector("#adminMeetingText");
+const adminStatus = document.querySelector("#adminStatus");
+const answeredList = document.querySelector("#answeredList");
+const missingList = document.querySelector("#missingList");
+const adminParticipantLink = document.querySelector("#adminParticipantLink");
+const copyAdminParticipantLinkButton = document.querySelector("#copyAdminParticipantLink");
 
 let meeting = {};
 let selectedDuration = "";
@@ -40,10 +47,19 @@ let responses = [];
 
 const urlParams = new URLSearchParams(window.location.search);
 const meetingIdFromUrl = urlParams.get("meeting");
+const adminIdFromUrl = urlParams.get("admin");
 
 if (meetingIdFromUrl) {
   createView.classList.add("hidden");
   loadMeeting(meetingIdFromUrl);
+}
+
+if (adminIdFromUrl) {
+  createView.classList.add("hidden");
+  participantView.classList.add("hidden");
+  ownerView.classList.remove("hidden");
+
+  loadAdmin(adminIdFromUrl);
 }
 
 setupSingleChoice("#durationButtons", value => {
@@ -260,6 +276,48 @@ async function loadMeeting(id) {
   participantView.scrollIntoView({ behavior: "smooth" });
 }
 
+async function loadAdmin(id) {
+  const { data: meetingData, error: meetingError } = await db
+    .from("meetings")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (meetingError) {
+    alert("Kunne ikke hente arrangørsiden: " + meetingError.message);
+    return;
+  }
+
+  const { data: responseData, error: responseError } = await db
+    .from("responses")
+    .select("*")
+    .eq("meeting_id", id);
+
+  if (responseError) {
+    alert("Kunne ikke hente svar: " + responseError.message);
+    return;
+  }
+
+  meeting = {
+    id,
+    title: meetingData.title,
+    description: meetingData.description,
+    duration: meetingData.duration,
+    period: meetingData.period,
+    timeBlocks: meetingData.time_blocks,
+    expectedParticipants: meetingData.expected_participants,
+  };
+
+  slots = generateSlots(meeting.period, meeting.timeBlocks);
+
+  responses = responseData.map(response => ({
+    name: response.participant_name,
+    slots: response.dates,
+  }));
+
+  renderAdmin();
+}
+
 function generateSlots(period, timeBlocks) {
   const days = getDaysFromPeriod(period);
   const slotList = [];
@@ -320,6 +378,63 @@ function toggleSlot(slotId) {
   } else {
     selectedSlots.push(slotId);
   }
+}
+
+function renderAdmin() {
+  adminMeetingName.textContent = meeting.title;
+  adminMeetingText.textContent = meeting.description;
+
+  adminStatus.textContent =
+    `${responses.length} / ${meeting.expectedParticipants} har svaret`;
+
+  adminParticipantLink.value =
+    `${window.location.origin}${window.location.pathname}?meeting=${meeting.id}`;
+
+  const answeredNames = responses.map(response => response.name);
+
+  answeredList.textContent =
+    answeredNames.length > 0 ? answeredNames.join(", ") : "Ingen endnu";
+
+  const missingCount = meeting.expectedParticipants - responses.length;
+
+  missingList.textContent =
+    missingCount > 0
+      ? `${missingCount} mangler at svare`
+      : "Alle har svaret 🎉";
+
+  results.innerHTML = "";
+
+  const sortedSlots = slots
+    .map(slot => {
+      const count = responses.filter(response =>
+        response.slots.includes(slot.id)
+      ).length;
+
+      const cannot = responses
+        .filter(response => !response.slots.includes(slot.id))
+        .map(response => response.name);
+
+      return { ...slot, count, cannot };
+    })
+    .sort((a, b) => b.count - a.count);
+
+  sortedSlots.slice(0, 3).forEach((slot, index) => {
+    const row = document.createElement("div");
+    row.className = "result-row";
+
+    const cannotText =
+      slot.cannot.length > 0
+        ? `${slot.cannot.join(", ")} kan ikke`
+        : "Alle der har svaret kan";
+
+    row.innerHTML = `
+      ${index + 1}. ${formatDate(slot.date)} · ${slot.timeBlock}<br>
+      ${slot.count}/${meeting.expectedParticipants} kan<br>
+      ${cannotText}
+    `;
+
+    results.appendChild(row);
+  });
 }
 
 function renderResults() {

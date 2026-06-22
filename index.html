@@ -101,9 +101,27 @@
     </section>
 
     <section id="ownerView" class="card hidden">
-      <h3>Bedste overlap</h3>
-      <div id="results"></div>
-    </section>
+  <h2 id="adminMeetingName"></h2>
+  <p id="adminMeetingText"></p>
+
+  <h3>Status</h3>
+  <div id="adminStatus" class="result-row"></div>
+
+  <h3>🏆 Bedste muligheder</h3>
+  <div id="results"></div>
+
+  <h3>✅ Har svaret</h3>
+  <div id="answeredList" class="result-row"></div>
+
+  <h3>⏳ Mangler svar</h3>
+  <div id="missingList" class="result-row"></div>
+
+  <h3>Deltagerlink</h3>
+  <input id="adminParticipantLink" type="text" readonly />
+  <button id="copyAdminParticipantLink">Kopiér deltagerlink</button>
+
+  <button onclick="window.location.href='/'">➕ Opret nyt møde</button>
+</section>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
