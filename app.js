@@ -34,6 +34,13 @@ let slots = [];
 let selectedSlots = [];
 let responses = [];
 
+const urlParams = new URLSearchParams(window.location.search);
+const meetingIdFromUrl = urlParams.get("meeting");
+
+if (meetingIdFromUrl) {
+  loadMeeting(meetingIdFromUrl);
+}
+
 setupSingleChoice("#durationButtons", value => {
   selectedDuration = value;
 });
@@ -181,6 +188,41 @@ function setupMultiChoice(selector, callback) {
 }
 
 function generateSlots(period, timeBlocks) {
+
+async function loadMeeting(id) {
+  const { data, error } = await db
+    .from("meetings")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    alert("Kunne ikke hente mødet: " + error.message);
+    return;
+  }
+
+  meeting = {
+    title: data.title,
+    description: data.description,
+    duration: data.duration,
+    period: data.period,
+    timeBlocks: data.time_blocks,
+    expectedParticipants: data.expected_participants,
+  };
+
+  slots = generateSlots(meeting.period, meeting.timeBlocks);
+
+  meetingName.textContent = meeting.title;
+  meetingText.textContent = meeting.description;
+  meetingDuration.textContent = meeting.duration;
+  meetingPeriod.textContent = meeting.period;
+  meetingParticipantCount.textContent = meeting.expectedParticipants;
+  meetingTimeBlocks.textContent = meeting.timeBlocks.join(", ");
+
+  participantView.classList.remove("hidden");
+  participantView.scrollIntoView({ behavior: "smooth" });
+}
+
   const days = getDaysFromPeriod(period);
   const slotList = [];
   const today = new Date();
