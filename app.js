@@ -38,6 +38,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const meetingIdFromUrl = urlParams.get("meeting");
 
 if (meetingIdFromUrl) {
+  alert("Loader møde: " + meetingIdFromUrl);
   loadMeeting(meetingIdFromUrl);
 }
 
