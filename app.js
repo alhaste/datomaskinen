@@ -159,6 +159,11 @@ copyMeetingLinkButton.addEventListener("click", async () => {
   await navigator.clipboard.writeText(meetingLink.value);
   copyMeetingLinkButton.textContent = "Kopieret ✅";
 });
+copyAdminParticipantLinkButton.addEventListener("click", async () => {
+  await navigator.clipboard.writeText(adminParticipantLink.value);
+  copyAdminParticipantLinkButton.textContent = "Kopieret ✅";
+});
+
 copyAdminLinkButton.addEventListener("click", async () => {
   await navigator.clipboard.writeText(adminLink.value);
   copyAdminLinkButton.textContent = "Kopieret ✅";
