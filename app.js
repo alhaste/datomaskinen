@@ -221,6 +221,9 @@ async function loadMeeting(id) {
   meetingTimeBlocks.textContent = meeting.timeBlocks.join(", ");
 
   participantView.classList.remove("hidden");
+
+  renderAvailability();
+
   participantView.scrollIntoView({ behavior: "smooth" });
 }
 
