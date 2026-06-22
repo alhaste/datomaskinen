@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Supabase Test</title>
+</head>
+<body>
+  <h1>Supabase test</h1>
+
+  <button id="testButton">Test forbindelse</button>
+
+  <p id="status">Ikke testet</p>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    const SUPABASE_URL = "https://cpgbopfzeuxtvhnkfdzn.supabase.co";
+
+    const SUPABASE_ANON_KEY =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwZ2JvcGZ6ZXV4dHZobmtmZHpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIxMDQ1MjQsImV4cCI6MjA5NzY4MDUyNH0.C_Eh50OiYNp0y0DyFR65zxGYGFNG3-UFYuh6vNEIwL8";
+
+    const client = supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_ANON_KEY
+    );
+
+    document.querySelector("#testButton").addEventListener("click", async () => {
+      const status = document.querySelector("#status");
+      status.textContent = "Tester...";
+
+      const { data, error } = await client
+        .from("meetings")
+        .select("*")
+        .limit(1);
+
+      if (error) {
+        status.textContent = "Fejl: " + error.message;
+        return;
+      }
+
+      status.textContent = "Forbundet ✅";
+      console.log(data);
+    });
+  </script>
+</body>
+</html>
