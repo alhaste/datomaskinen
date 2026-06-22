@@ -78,13 +78,13 @@ createMeetingButton.addEventListener("click", async () => {
   }
 
   meeting = {
-    title,
-    description,
-    duration: selectedDuration,
-    period: selectedPeriod,
-    timeBlocks: selectedTimeBlocks,
-    expectedParticipants: participantCount,
-  };
+  title,
+  description,
+  duration: selectedDuration,
+  period: selectedPeriod,
+  timeBlocks: selectedTimeBlocks,
+  expectedParticipants: participantCount,
+};
 
 const { data, error } = await db
   .from("meetings")
@@ -108,7 +108,7 @@ if (error) {
 const link = `${window.location.origin}${window.location.pathname}?meeting=${data.id}`;
 
 meetingLink.value = link;
-meetingLinkBox.classList.remove("hidden");
+meeting.id = data.id;
 
   slots = generateSlots(selectedPeriod, selectedTimeBlocks);
 
@@ -133,7 +133,7 @@ copyMeetingLinkButton.addEventListener("click", async () => {
   copyMeetingLinkButton.textContent = "Kopieret ✅";
 });
 
-saveResponseButton.addEventListener("click", () => {
+saveResponseButton.addEventListener("click", async () => {
   const name = document.querySelector("#participantName").value;
 
   if (!name) {
@@ -143,6 +143,21 @@ saveResponseButton.addEventListener("click", () => {
 
   if (selectedSlots.length === 0) {
     alert("Vælg mindst én mulighed.");
+    return;
+  }
+
+  const meetingId = meetingIdFromUrl || meeting.id;
+
+  const { error } = await db
+    .from("responses")
+    .insert({
+      meeting_id: meetingId,
+      participant_name: name,
+      dates: selectedSlots,
+    });
+
+  if (error) {
+    alert("Kunne ikke gemme svar: " + error.message);
     return;
   }
 
