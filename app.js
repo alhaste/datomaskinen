@@ -1,3 +1,11 @@
+const SUPABASE_URL = "https://cpgbopfzeuxtvhnkfdzn.supabase.co";
+
+const SUPABASE_ANON_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwZ2JvcGZ6ZXV4dHZobmtmZHpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIxMDQ1MjQsImV4cCI6MjA5NzY4MDUyNH0.C_Eh50OiYNp0y0DyFR65zxGYGFNG3-UFYuh6vNEIwL8";
+
+const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+
 const createMeetingButton = document.querySelector("#createMeeting");
 const saveResponseButton = document.querySelector("#saveResponse");
 
@@ -13,6 +21,9 @@ const meetingTimeBlocks = document.querySelector("#meetingTimeBlocks");
 
 const availabilityGrid = document.querySelector("#availabilityGrid");
 const results = document.querySelector("#results");
+const meetingLinkBox = document.querySelector("#meetingLinkBox");
+const meetingLink = document.querySelector("#meetingLink");
+const copyMeetingLinkButton = document.querySelector("#copyMeetingLink");
 
 let meeting = {};
 let selectedDuration = "";
@@ -39,7 +50,7 @@ setupMultiChoice("#timeBlockButtons", values => {
   selectedTimeBlocks = values;
 });
 
-createMeetingButton.addEventListener("click", () => {
+createMeetingButton.addEventListener("click", async () => {
   const title = document.querySelector("#meetingTitle").value;
   const description = document.querySelector("#meetingDescription").value;
 
@@ -67,6 +78,30 @@ createMeetingButton.addEventListener("click", () => {
     expectedParticipants: participantCount,
   };
 
+const { data, error } = await db
+  .from("meetings")
+  .insert({
+    title: meeting.title,
+    code: crypto.randomUUID(),
+    description: meeting.description,
+    duration: meeting.duration,
+    period: meeting.period,
+    time_blocks: meeting.timeBlocks,
+    expected_participants: meeting.expectedParticipants,
+  })
+  .select()
+  .single();
+
+if (error) {
+  alert("Kunne ikke gemme mødet: " + error.message);
+  return;
+}
+
+const link = `${window.location.origin}${window.location.pathname}?meeting=${data.id}`;
+
+meetingLink.value = link;
+meetingLinkBox.classList.remove("hidden");
+
   slots = generateSlots(selectedPeriod, selectedTimeBlocks);
 
   meetingName.textContent = meeting.title;
@@ -83,6 +118,11 @@ meetingTimeBlocks.textContent = meeting.timeBlocks.join(", ");
   renderResults();
 
   participantView.scrollIntoView({ behavior: "smooth" });
+  });
+
+copyMeetingLinkButton.addEventListener("click", async () => {
+  await navigator.clipboard.writeText(meetingLink.value);
+  copyMeetingLinkButton.textContent = "Kopieret ✅";
 });
 
 saveResponseButton.addEventListener("click", () => {
