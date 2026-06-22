@@ -27,6 +27,7 @@ const meetingLink = document.querySelector("#meetingLink");
 const copyMeetingLinkButton = document.querySelector("#copyMeetingLink");
 const adminLink = document.querySelector("#adminLink");
 const copyAdminLinkButton = document.querySelector("#copyAdminLink");
+const saveConfirmation = document.querySelector("#saveConfirmation");
 
 let meeting = {};
 let selectedDuration = "";
@@ -178,6 +179,10 @@ saveResponseButton.addEventListener("click", async () => {
     name,
     slots: [...selectedSlots],
   });
+  saveConfirmation.classList.remove("hidden");
+  saveResponseButton.disabled = true;
+  saveResponseButton.textContent = "Svar gemt ✅";
+
 
   selectedSlots = [];
   document.querySelector("#participantName").value = "";
