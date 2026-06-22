@@ -188,7 +188,7 @@ function setupMultiChoice(selector, callback) {
   });
 }
 
-function generateSlots(period, timeBlocks) {
+
 
 async function loadMeeting(id) {
   const { data, error } = await db
@@ -224,6 +224,7 @@ async function loadMeeting(id) {
   participantView.scrollIntoView({ behavior: "smooth" });
 }
 
+function generateSlots(period, timeBlocks) {
   const days = getDaysFromPeriod(period);
   const slotList = [];
   const today = new Date();
