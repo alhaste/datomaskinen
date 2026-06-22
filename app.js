@@ -9,7 +9,7 @@ const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const createMeetingButton = document.querySelector("#createMeeting");
 const saveResponseButton = document.querySelector("#saveResponse");
 
-const participantView = document.querySelector("#participantView");
+const createView = document.querySelector("#createView");
 const ownerView = document.querySelector("#ownerView");
 
 const meetingName = document.querySelector("#meetingName");
@@ -38,7 +38,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const meetingIdFromUrl = urlParams.get("meeting");
 
 if (meetingIdFromUrl) {
-  alert("Loader møde: " + meetingIdFromUrl);
+  createView.classList.add("hidden");
   loadMeeting(meetingIdFromUrl);
 }
 
