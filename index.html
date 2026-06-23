@@ -27,7 +27,15 @@
 
       <label>
         Beskrivelse
-        <textarea id="meetingDescription" placeholder="Hvad handler mødet om? (Valgfrit)"></textarea>
+        <textarea
+  id="meetingDescription" rows="6"
+  placeholder="Ekstra Information? (valgfrit)
+
+Fx:
+• Mødet starter kl. 16.30
+• Medbring budgetudkast
+• Vi spiser pizza bagefter 🍕"
+></textarea>
       </label>
 
       <h3>Hvor længe skal mødet vare?</h3>
@@ -72,6 +80,16 @@
         <button data-value="15-17">15-17</button>
         <button data-value="17-19">17-19</button>
         <button data-value="19-21">19-21</button>
+      <div class="tip-box">
+  <strong>💡 Tip</strong>
+  <p>
+    Starter mødet på et bestemt tidspunkt?
+    Vælg den tidsblok der passer bedst, og skriv fx
+    <strong>"Starter kl. 16.30"</strong>
+    under Ekstra information.
+  </p>
+</div>
+      
       </div>
 
       <button id="createMeeting">Opret møde →</button>

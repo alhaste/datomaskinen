@@ -243,3 +243,23 @@ button {
   color: #92400e;
   letter-spacing: 0.03em;
 }
+
+.tip-box {
+  margin: 18px 0 22px;
+  padding: 16px 18px;
+  border-radius: 18px;
+
+  background: #f8fafc;
+  border: 1px solid #dbe3ef;
+
+  color: #374151;
+  line-height: 1.45;
+}
+
+.tip-box p {
+  margin: 8px 0 0;
+}
+
+.tip-box strong {
+  color: #1f2937;
+}
