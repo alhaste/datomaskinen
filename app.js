@@ -141,8 +141,9 @@ meetingLinkBox.classList.remove("hidden");
   slots = generateSlots(selectedPeriod, selectedTimeBlocks);
 
   meetingName.textContent = meeting.title;
-  adminMeetingText.textContent = meeting.description;
-  meetingDuration.textContent = meeting.duration;
+renderMeetingDescription();
+
+meetingDuration.textContent = meeting.duration;
   meetingPeriod.textContent = meeting.period;
 meetingParticipantCount.textContent = meeting.expectedParticipants;
 meetingTimeBlocks.textContent = meeting.timeBlocks.join(", ");
@@ -224,17 +225,7 @@ function renderMeetingDescription() {
       ? "block"
       : "none";
 }
-function renderMeetingDescription() {
-  meetingText.textContent = meeting.description || "";
 
-  const descriptionBlock =
-    document.querySelector("#meetingDescriptionBlock");
-
-  descriptionBlock.style.display =
-    meeting.description && meeting.description.trim()
-      ? "block"
-      : "none";
-}
 
 
 function setupSingleChoice(selector, callback) {
