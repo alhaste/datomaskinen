@@ -22,12 +22,12 @@
 
       <label>
         Mødenavn
-        <input id="meetingTitle" type="text" placeholder="Fx Bestyrelsesmøde" />
+        <input id="meetingTitle" type="text" placeholder="Fx Arbejdsgruppemøde" />
       </label>
 
       <label>
         Beskrivelse
-        <textarea id="meetingDescription" placeholder="Kort info om mødet"></textarea>
+        <textarea id="meetingDescription" placeholder="Hvad handler mødet om? (Valgfrit)"></textarea>
       </label>
 
       <h3>Varighed</h3>
@@ -74,7 +74,7 @@
         <button data-value="19-21">19-21</button>
       </div>
 
-      <button id="createMeeting">Opret møde</button>
+      <button id="createMeeting">Opret møde →</button>
       <div id="meetingLinkBox" class="hidden">
   <h3>Deltagerlink</h3>
   <input id="meetingLink" type="text" readonly />
@@ -89,10 +89,10 @@
     <section id="participantView" class="card hidden">
       <h2 id="meetingName"></h2>
       <p id="meetingText"></p>
-      <p><strong>Varighed:</strong> <span id="meetingDuration"></span></p>
-      <p><strong>Periode:</strong> <span id="meetingPeriod"></span></p>
-<p><strong>Antal deltagere:</strong> <span id="meetingParticipantCount"></span></p>
-<p><strong>Tidsblokke:</strong> <span id="meetingTimeBlocks"></span></p>
+      <p><strong>Hvor lang tid varer mødet?</strong> <span id="meetingDuration"></span></p>
+      <p><strong>Hvor langt ud i fremtiden kan mødet planlægges?</strong> <span id="meetingPeriod"></span></p>
+<p><strong>Hvor mange skal deltage?</strong> <span id="meetingParticipantCount"></span></p>
+<p><strong>Hvornår på dagen passer det?</strong> <span id="meetingTimeBlocks"></span></p>
 
       <label>
         Dit navn
