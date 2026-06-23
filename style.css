@@ -5,8 +5,10 @@
 body {
   margin: 0;
   font-family: system-ui, sans-serif;
-  background: #f4f4f1;
-  color: #171717;
+  background:
+    radial-gradient(circle at top left, rgba(47, 91, 234, 0.16), transparent 34%),
+    linear-gradient(180deg, #eef3ff 0%, #f7f7f2 48%, #f4efe6 100%);
+  color: #1f2937;
 }
 
 .app {
@@ -16,11 +18,12 @@ body {
 }
 
 .card {
-  background: white;
-  padding: 22px;
-  border-radius: 18px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.94);
+  padding: 24px;
+  border-radius: 22px;
+  box-shadow: 0 18px 45px rgba(31, 41, 55, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  margin-bottom: 22px;
 }
 
 h1, h2, h3 {
@@ -30,6 +33,25 @@ h1, h2, h3 {
 .subtitle {
   color: #555;
   margin-bottom: 24px;
+}
+
+.hero {
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #666;
+}
+
+.hero-text {
+  margin: -10px 0 0;
+  color: #444;
+  line-height: 1.5;
 }
 
 label {
@@ -57,12 +79,13 @@ textarea {
 
 button {
   border: 0;
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 16px;
   font-weight: 800;
-  background: #171717;
+  background: #2f5bea;
   color: white;
   cursor: pointer;
+  box-shadow: 0 8px 18px rgba(47, 91, 234, 0.22);
 }
 
 .button-grid {
@@ -79,8 +102,9 @@ button {
 }
 
 .button-grid button.selected {
-  background: #171717;
+  background: #2f5bea;
   color: white;
+  box-shadow: 0 8px 18px rgba(47, 91, 234, 0.22);
 }
 
 #availabilityGrid {
@@ -114,11 +138,13 @@ button {
 }
 
 .result-row {
-  padding: 14px;
-  border-radius: 12px;
-  background: #f1f1f1;
-  margin-bottom: 8px;
+  padding: 18px;
+  border-radius: 18px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 12px;
   font-weight: 700;
+  line-height: 1.45;
 }
 
 .hidden {
