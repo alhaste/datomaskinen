@@ -75,17 +75,28 @@
       </div>
 
       <button id="createMeeting">Opret møde →</button>
-      <div id="meetingLinkBox" class="hidden">
-  <h3>Deltagerlink</h3>
-  <input id="meetingLink" type="text" readonly />
-  <button id="copyMeetingLink">Kopiér link</button>
+      <div id="meetingLinkBox" class="hidden success-panel">
+  <h2>✅ Mødet er oprettet</h2>
+  <p class="helper-text">
+    Del deltagerlinket med dem, der skal svare.
+  </p>
 
-  <h3>Arrangørlink</h3>
-<p class="helper-text">
-  Gem dette link. Det er dit private link til resultaterne.
-</p>
-<input id="adminLink" type="text" readonly />
-<button id="copyAdminLink">Kopiér arrangørlink</button>
+  <div class="link-card">
+    <h3>📋 Deltagerlink</h3>
+    <input id="meetingLink" type="text" readonly />
+    <button id="copyMeetingLink">Kopiér deltagerlink</button>
+  </div>
+
+  <div class="link-card warning-card">
+    <h3>🔑 Arrangørlink</h3>
+    <p class="warning-title">⚠️ GEM DETTE LINK</p>
+    <p class="helper-text">
+      Det er dit private overblik over svarene.
+      Hvis du mister det, kan du ikke se mødet igen.
+    </p>
+    <input id="adminLink" type="text" readonly />
+    <button id="copyAdminLink">Kopiér arrangørlink</button>
+  </div>
 </div>
     </section>
 
