@@ -265,6 +265,8 @@ button {
 }
 
 .section-label {
+  margin-top: 28px;
+margin-bottom: 8px;
   margin: 22px 0 6px;
   font-size: 0.9rem;
   font-weight: 700;

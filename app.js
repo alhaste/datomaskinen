@@ -224,6 +224,17 @@ function renderMeetingDescription() {
       ? "block"
       : "none";
 }
+function renderMeetingDescription() {
+  meetingText.textContent = meeting.description || "";
+
+  const descriptionBlock =
+    document.querySelector("#meetingDescriptionBlock");
+
+  descriptionBlock.style.display =
+    meeting.description && meeting.description.trim()
+      ? "block"
+      : "none";
+}
 
 
 function setupSingleChoice(selector, callback) {
