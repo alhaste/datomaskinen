@@ -153,7 +153,7 @@ meetingTimeBlocks.textContent = meeting.timeBlocks.join(", ");
   renderAvailability();
   renderResults();
 
-  participantView.scrollIntoView({ behavior: "smooth" });
+  meetingLinkBox.scrollIntoView({ behavior: "smooth" });
   });
 
 copyMeetingLinkButton.addEventListener("click", async () => {
