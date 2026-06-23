@@ -31,6 +31,7 @@ const saveConfirmation = document.querySelector("#saveConfirmation");
 const adminMeetingName = document.querySelector("#adminMeetingName");
 const adminMeetingText = document.querySelector("#adminMeetingText");
 const adminStatus = document.querySelector("#adminStatus");
+const adminProgress = document.querySelector("#adminProgress");
 const answeredList = document.querySelector("#answeredList");
 const missingList = document.querySelector("#missingList");
 const adminParticipantLink = document.querySelector("#adminParticipantLink");
@@ -391,6 +392,9 @@ function renderAdmin() {
 
   adminStatus.textContent =
     `${responses.length} / ${meeting.expectedParticipants} har svaret`;
+
+    adminProgress.style.width =
+  `${(responses.length / meeting.expectedParticipants) * 100}%`;
 
   adminParticipantLink.value =
     `${window.location.origin}${window.location.pathname}?meeting=${meeting.id}`;
