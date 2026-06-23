@@ -210,3 +210,10 @@ button {
 
   transition: all 0.2s ease;
 }
+
+.helper-text {
+  color: #6b7280;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  margin-top: -6px;
+}
