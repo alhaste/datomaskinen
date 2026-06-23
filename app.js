@@ -401,8 +401,12 @@ function renderAdmin() {
 
   const answeredNames = responses.map(response => response.name);
 
-  answeredList.textContent =
-    answeredNames.length > 0 ? answeredNames.join(", ") : "Ingen endnu";
+  answeredList.innerHTML =
+  answeredNames.length > 0
+    ? answeredNames
+        .map(name => `<span class="participant-chip">✓ ${name}</span>`)
+        .join("")
+    : "Ingen endnu";
 
   const missingCount = meeting.expectedParticipants - responses.length;
 
