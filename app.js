@@ -141,7 +141,7 @@ meetingLinkBox.classList.remove("hidden");
   slots = generateSlots(selectedPeriod, selectedTimeBlocks);
 
   meetingName.textContent = meeting.title;
-  meetingText.textContent = meeting.description;
+  adminMeetingText.textContent = meeting.description;
   meetingDuration.textContent = meeting.duration;
   meetingPeriod.textContent = meeting.period;
 meetingParticipantCount.textContent = meeting.expectedParticipants;
@@ -213,6 +213,19 @@ saveResponseButton.addEventListener("click", async () => {
   renderResults();
 });
 
+function renderMeetingDescription() {
+  meetingText.textContent = meeting.description || "";
+
+  const descriptionBlock =
+    document.querySelector("#meetingDescriptionBlock");
+
+  descriptionBlock.style.display =
+    meeting.description && meeting.description.trim()
+      ? "block"
+      : "none";
+}
+
+
 function setupSingleChoice(selector, callback) {
   const container = document.querySelector(selector);
   const buttons = container.querySelectorAll("button");
@@ -269,7 +282,7 @@ async function loadMeeting(id) {
   slots = generateSlots(meeting.period, meeting.timeBlocks);
 
   meetingName.textContent = meeting.title;
-  meetingText.textContent = meeting.description;
+  adminMeetingText.textContent = meeting.description;
   meetingDuration.textContent = meeting.duration;
   meetingPeriod.textContent = meeting.period;
   meetingParticipantCount.textContent = meeting.expectedParticipants;

@@ -263,3 +263,23 @@ button {
 .tip-box strong {
   color: #1f2937;
 }
+
+.section-label {
+  margin: 22px 0 6px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6b7280;
+}
+
+#meetingName {
+  margin-top: 0;
+  margin-bottom: 18px;
+}
+
+#meetingText {
+  margin-top: 0;
+  line-height: 1.6;
+  color: #374151;
+}
