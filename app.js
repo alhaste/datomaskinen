@@ -425,7 +425,7 @@ function renderAdmin() {
 
   sortedSlots.slice(0, 3).forEach((slot, index) => {
     const row = document.createElement("div");
-    row.className = "result-row";
+    row.className = index === 0 ? "result-row top-result" : "result-row";
 
     const cannotText =
       slot.cannot.length > 0
